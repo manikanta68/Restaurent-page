@@ -2,22 +2,8 @@
   width: 100%;
   background-color: rgb(248, 248, 243);
 }
-.main-heading {
-  font-family: 'Roboto';
-  color: rgb(24, 20, 20);
-}
-.nav-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 15px;
-  padding-right: 15px;
-  border: solid;
-  border-width: 1px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-color: lavender;
+.link {
+  text-decoration: none;
 }
 
 .tabs_menu {
@@ -32,6 +18,8 @@
   border-left: none;
   border-right: none;
   border-color: lavender;
+
+  margin: 0px;
 }
 
 ::-webkit-scrollbar {
@@ -57,14 +45,16 @@
 }
 
 .dish-image {
-  height: 60px;
-  width: 60px;
+  height: 50px;
+  width: 50px;
   border-radius: 10px;
 }
 
 @media screen and (min-width: 768px) {
   .dish-image {
     align-self: center;
+    height: 80px;
+    width: 80px;
   }
 }
 
@@ -73,10 +63,16 @@
   font-family: 'Roboto';
   color: rgb(24, 20, 20);
   font-weight: 600;
-  font-size: 15px;
-  margin-bottom: 14px;
+  font-size: 13px;
+  margin-bottom: 10px;
+  display: flex;
+  width: fit-content;
 }
-
+@media screen and(min-width: 768px) {
+  .dish-name {
+    font-size: 20px;
+  }
+}
 .dish-price {
   font-family: 'Roboto';
   font-weight: 500;
@@ -84,49 +80,23 @@
   margin-top: 0px;
   color: rgb(92, 87, 87);
   margin-bottom: 14px;
-}
-
-.increment-decrement-buttons {
-  display: flex;
-  align-items: center;
-  background-color: green;
+  font-size: 10px;
   width: fit-content;
-  padding: 3px;
-  border-radius: 25px;
-  height: fit-content;
 }
 
-.cart-count {
-  margin-left: 7px;
-  margin-right: 7px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  color: white;
-}
-
-.minus-button {
-  background-color: transparent;
-  color: white;
-  border: none;
-  font-size: 15px;
-}
-
-.plus-button {
-  background-color: transparent;
-  color: white;
-  border: none;
-  font-size: 15px;
-}
 .addon-cat {
   color: blue;
   margin-bottom: 0px;
-  margin-top: 9px;
+  margin-top: 4px;
+  font-size: 12px;
+  width: fit-content;
 }
 .dish-availability {
   color: red;
   margin-bottom: 0px;
   margin-top: 9px;
-  width: max-content;
+  width: fit-content;
+  font-size: 12px;
 }
 
 .veg-container {
@@ -161,35 +131,46 @@
   border-radius: 50px;
 }
 
-.calories-container {
-  display: flex;
-  flex-direction: column;
-}
-
 .calories {
   margin: 0px;
-  align-self: center;
-  margin-left: 6%;
-  margin-right: 6%;
+
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 12px;
   color: orange;
   font-weight: 600;
 }
+@media screen and (min-width: 476px) {
+  .calories {
+    margin-right: 100px;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .calories {
-    margin-left: 5px;
+    margin-right: 300px;
   }
 }
 
 .item-details {
-  width: min-content;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  margin-left: 1%;
+}
+
+.calories-container {
+  display: flex;
+  align-items: center;
+  align-self: center;
 }
 
 .dish-description {
   font-family: 'Roboto';
   margin-top: 0px;
   color: gray;
+  font-size: 10px;
+  width: fit-content;
 }
 
 .dish-item {
@@ -214,30 +195,19 @@
   border-bottom: 1px;
   border-bottom-color: crimson;
 }
-
-.cart-container-with-count {
-  display: flex;
-  align-items: center;
-}
-
-.cart-count-background {
-  background-color: rgb(247, 112, 112);
+.addToCartButton {
+  margin-bottom: 7px;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  background-color: rgb(76, 221, 76);
   color: white;
-  height: 15px;
-  width: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 13px;
-  border-radius: 50px;
+  border-radius: 5px;
+  font-weight: 500;
+  transition-duration: 0.4s;
+  width: fit-content;
 }
-
-.my-orders {
-  display: none;
-}
-@media screen and (min-width: 768px) {
-  .my-orders {
-    display: flex;
-  }
+.addButton:hover {
+  background-color: rgb(224, 224, 10);
+  color: red;
 }

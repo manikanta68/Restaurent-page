@@ -1,0 +1,60 @@
+.main-heading {
+  font-family: 'Roboto';
+  color: rgb(24, 20, 20);
+  font-size: 16px;
+}
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: solid;
+  border-width: 1px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-color: lavender;
+}
+.cart-container-with-count {
+  display: flex;
+  align-items: center;
+}
+
+.cart-count-background {
+  background-color: rgb(247, 112, 112);
+  color: white;
+  height: 15px;
+  width: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 13px;
+  border-radius: 50px;
+}
+
+.cartIconButton {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.my-orders {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .my-orders {
+    display: flex;
+  }
+}
+.logout {
+  margin-left: 20px;
+  border: none;
+  cursor: pointer;
+  padding: 7px;
+  background-color: rgb(104, 104, 250);
+  color: white;
+  border-radius: 4px;
+  font-weight: 500;
+}
