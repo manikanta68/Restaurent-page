@@ -75,10 +75,7 @@ const Cart = () => (
                               +
                             </button>
                           </div>{' '}
-                          <p className="cart-dish-price">
-                            Rs {}
-                            {Math.ceil(each.dishPrice) * 30 * each.count}
-                          </p>
+                          <p className="cart-dish-price">{each.dishPrice}</p>
                         </div>
                       </div>
                       <button

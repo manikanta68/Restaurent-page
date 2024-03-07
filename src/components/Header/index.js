@@ -50,7 +50,11 @@ class Header extends Component {
               <div className="cart-container-with-count">
                 <p className="my-orders">My Orders</p>
                 <Link to="/cart">
-                  <button className="cartIconButton" type="button">
+                  <button
+                    data-testid="cart"
+                    className="cartIconButton"
+                    type="button"
+                  >
                     <AiOutlineShoppingCart size={30} />
                   </button>
                 </Link>

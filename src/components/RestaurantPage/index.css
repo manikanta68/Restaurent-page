@@ -206,6 +206,7 @@
   font-weight: 500;
   transition-duration: 0.4s;
   width: fit-content;
+  margin-top: 6px;
 }
 .addButton:hover {
   background-color: rgb(224, 224, 10);

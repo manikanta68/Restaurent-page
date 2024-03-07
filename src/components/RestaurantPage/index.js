@@ -91,85 +91,6 @@ class RestaurantPage extends Component {
                       addCartItem(each)
                     }
 
-                    const addToCartButtonCheck =
-                      each.count > 0 ? (
-                        <button
-                          onClick={addItemToCart}
-                          className="addToCartButton addButton"
-                          type="button"
-                        >
-                          Add To Cart
-                        </button>
-                      ) : (
-                        <div className="increment-decrement-buttons">
-                          <button
-                            onClick={() => {
-                              const newList = categoryList.map(newItem => {
-                                if (
-                                  newItem.menuCategoryId ===
-                                  activeObj[0].menuCategoryId
-                                ) {
-                                  const updateItem = newItem.categoryDishes.map(
-                                    tem => {
-                                      if (tem.dishId === each.dishId) {
-                                        if (tem.count > 0) {
-                                          return {...tem, count: tem.count - 1}
-                                        }
-                                        return tem
-                                      }
-                                      return tem
-                                    },
-                                  )
-                                  return {
-                                    ...newItem,
-                                    categoryDishes: updateItem,
-                                  }
-                                }
-                                return newItem
-                              })
-                              console.log(newList)
-
-                              this.setState({categoryList: newList})
-                            }}
-                            className="minus-button"
-                            type="button"
-                          >
-                            -
-                          </button>
-                          <p className="cart-count">{each.count}</p>
-                          <button
-                            onClick={() => {
-                              const newList = categoryList.map(newItem => {
-                                if (
-                                  newItem.menuCategoryId ===
-                                  activeObj[0].menuCategoryId
-                                ) {
-                                  const updateItem = newItem.categoryDishes.map(
-                                    tem => {
-                                      if (tem.dishId === each.dishId) {
-                                        return {...tem, count: tem.count + 1}
-                                      }
-                                      return tem
-                                    },
-                                  )
-                                  return {
-                                    ...newItem,
-                                    categoryDishes: updateItem,
-                                  }
-                                }
-                                return newItem
-                              })
-                              console.log(newList)
-                              this.setState({categoryList: newList})
-                            }}
-                            className="plus-button"
-                            type="button"
-                          >
-                            +
-                          </button>
-                        </div>
-                      )
-
                     return (
                       <div className="dish-item">
                         {each.dishType === 2 ? (
@@ -190,12 +111,95 @@ class RestaurantPage extends Component {
                           <p className="dish-description">
                             {each.dishDescription}
                           </p>
-                          {each.dishAvailability && addToCartButtonCheck}
+                          {each.dishAvailability && (
+                            <div className="increment-decrement-buttons">
+                              <button
+                                onClick={() => {
+                                  const newList = categoryList.map(newItem => {
+                                    if (
+                                      newItem.menuCategoryId ===
+                                      activeObj[0].menuCategoryId
+                                    ) {
+                                      const updateItem = newItem.categoryDishes.map(
+                                        tem => {
+                                          if (tem.dishId === each.dishId) {
+                                            if (tem.count > 0) {
+                                              return {
+                                                ...tem,
+                                                count: tem.count - 1,
+                                              }
+                                            }
+                                            return tem
+                                          }
+                                          return tem
+                                        },
+                                      )
+                                      return {
+                                        ...newItem,
+                                        categoryDishes: updateItem,
+                                      }
+                                    }
+                                    return newItem
+                                  })
+                                  console.log(newList)
+
+                                  this.setState({categoryList: newList})
+                                }}
+                                className="minus-button"
+                                type="button"
+                              >
+                                -
+                              </button>
+                              <p className="cart-count">{each.count}</p>
+                              <button
+                                onClick={() => {
+                                  const newList = categoryList.map(newItem => {
+                                    if (
+                                      newItem.menuCategoryId ===
+                                      activeObj[0].menuCategoryId
+                                    ) {
+                                      const updateItem = newItem.categoryDishes.map(
+                                        tem => {
+                                          if (tem.dishId === each.dishId) {
+                                            return {
+                                              ...tem,
+                                              count: tem.count + 1,
+                                            }
+                                          }
+                                          return tem
+                                        },
+                                      )
+                                      return {
+                                        ...newItem,
+                                        categoryDishes: updateItem,
+                                      }
+                                    }
+                                    return newItem
+                                  })
+                                  console.log(newList)
+                                  this.setState({categoryList: newList})
+                                }}
+                                className="plus-button"
+                                type="button"
+                              >
+                                +
+                              </button>
+                            </div>
+                          )}
 
                           {each.addonCat.length > 0 && (
                             <p className="addon-cat">
                               Customizations available
                             </p>
+                          )}
+                          {each.dishAvailability && each.count > 0 && (
+                            <button
+                              onClick={addItemToCart}
+                              className="addToCartButton addButton"
+                              type="button"
+                            >
+                              Add To Cart
+                            </button>
                           )}
                           {each.dishAvailability === false && (
                             <p className="dish-availability">Not available</p>
