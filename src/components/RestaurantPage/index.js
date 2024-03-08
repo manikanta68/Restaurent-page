@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import {Redirect} from 'react-router-dom'
+import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
 import Header from '../Header'
 
@@ -7,14 +8,29 @@ import CartContext from '../../context/CartContext'
 
 import './index.css'
 
+const apiStatusConstants = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inProgress: 'IN_PROGRESS',
+}
+
 class RestaurantPage extends Component {
-  state = {activeTab: '11', categoryList: []}
+  state = {
+    activeTab: '11',
+    categoryList: [],
+    apiStatus: apiStatusConstants.initial,
+  }
 
   componentDidMount() {
     this.getData()
   }
 
   getData = async () => {
+    this.setState({
+      apiStatus: apiStatusConstants.inProgress,
+    })
+
     const url = 'https://run.mocky.io/v3/77a7e71b-804a-4fbd-822c-3e365d3482cc'
     const response = await fetch(url)
     const data = await response.json()
@@ -41,21 +57,21 @@ class RestaurantPage extends Component {
 
       this.setState({
         categoryList: modifiedList,
+        apiStatus: apiStatusConstants.success,
+      })
+    } else {
+      this.setState({
+        apiStatus: apiStatusConstants.failure,
       })
     }
   }
 
-  render() {
+  renderSuccessView = () => {
     const {activeTab, categoryList} = this.state
 
     const activeObj = categoryList.filter(
       each => each.menuCategoryId === activeTab,
     )
-    const jwtToken = Cookies.get('jwt_token')
-    if (jwtToken === undefined) {
-      return <Redirect to="/login" />
-    }
-
     return (
       <div className="restaurant-page">
         {categoryList.length > 0 && <Header />}
@@ -226,6 +242,36 @@ class RestaurantPage extends Component {
         )}
       </div>
     )
+  }
+
+  renderFailureView = () => <h1>We are unavailable to fetch your request</h1>
+
+  renderLoadingView = () => (
+    <div className="products-loader-container">
+      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    </div>
+  )
+
+  callingResponseStatus = () => {
+    const {apiStatus} = this.state
+    switch (apiStatus) {
+      case apiStatusConstants.success:
+        return this.renderSuccessView()
+      case apiStatusConstants.failure:
+        return this.renderFailureView()
+      case apiStatusConstants.inProgress:
+        return this.renderLoadingView()
+      default:
+        return null
+    }
+  }
+
+  render() {
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken === undefined) {
+      return <Redirect to="/login" />
+    }
+    return this.callingResponseStatus()
   }
 }
 

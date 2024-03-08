@@ -209,6 +209,5 @@
   margin-top: 6px;
 }
 .addButton:hover {
-  background-color: rgb(224, 224, 10);
-  color: red;
+  transform: scale(1.1);
 }
