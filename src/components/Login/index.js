@@ -4,14 +4,19 @@ import Cookies from 'js-cookie'
 import './index.css'
 
 class Login extends Component {
-  state = {username: '', password: '', showSubmitError: false, errorMsg: ''}
+  state = {
+    usernameInput: '',
+    passwordInput: '',
+    showSubmitError: false,
+    errorMsg: '',
+  }
 
   onUsername = event => {
-    this.setState({username: event.target.value})
+    this.setState({usernameInput: event.target.value})
   }
 
   onPassword = event => {
-    this.setState({password: event.target.value})
+    this.setState({passwordInput: event.target.value})
   }
 
   onSubmitSuccess = jwtToken => {
@@ -26,11 +31,10 @@ class Login extends Component {
 
   submitForm = async event => {
     event.preventDefault()
-    const {username, password} = this.state
-    console.log(username, password)
+    const {usernameInput, passwordInput} = this.state
     const userData = {
-      username,
-      password,
+      username: usernameInput,
+      password: passwordInput,
     }
     const options = {
       method: 'POST',
@@ -39,7 +43,6 @@ class Login extends Component {
     const url = 'https://apis.ccbp.in/login'
     const response = await fetch(url, options)
     const data = await response.json()
-    console.log(response)
     if (response.ok === true) {
       this.onSubmitSuccess(data.jwt_token)
     } else {
@@ -48,7 +51,7 @@ class Login extends Component {
   }
 
   render() {
-    const {username, password, showSubmitError, errorMsg} = this.state
+    const {usernameInput, passwordInput, showSubmitError, errorMsg} = this.state
     const jwtToken = Cookies.get('jwt_token')
     if (jwtToken !== undefined) {
       return <Redirect to="/" />
@@ -63,7 +66,7 @@ class Login extends Component {
                 USERNAME
               </label>
               <input
-                value={username}
+                value={usernameInput}
                 onChange={this.onUsername}
                 className="userName"
                 placeholder="username"
@@ -77,7 +80,7 @@ class Login extends Component {
               </label>
               <input
                 onChange={this.onPassword}
-                value={password}
+                value={passwordInput}
                 className="password"
                 placeholder="password"
                 type="password"
