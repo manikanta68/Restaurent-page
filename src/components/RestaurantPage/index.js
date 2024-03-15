@@ -117,7 +117,7 @@ class RestaurantPage extends Component {
                             >
                               -
                             </button>
-                            <p className="cart-count">{each.count}</p>
+                            {/* <p className="cart-count">{each.count}</p> */}
                             <button
                               onClick={() => {
                                 const newList = categoryList.map(newItem => {
