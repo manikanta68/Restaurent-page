@@ -14,15 +14,19 @@ const Header = props => {
   return (
     <CartContext.Consumer>
       {value => {
-        const {cartList, restDetails} = value
+        const {cartList} = value
 
         return (
           <nav className="nav-bar">
-            {restDetails.type !== 'undefined' && (
+            <Link className="link" to="/">
+              <h1 className="main-heading">UNI Resto Cafe</h1>
+            </Link>
+
+            {/* {restDetails.type !== 'undefined' && (
               <Link className="link" to="/">
                 <h1 className="main-heading">{restDetails.restaurant_name}</h1>
               </Link>
-            )}
+            )} */}
 
             <div className="cart-container-with-count">
               <p className="my-orders">My Orders</p>

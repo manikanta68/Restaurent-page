@@ -8,66 +8,8 @@ import ProtectedRoute from './components/ProtectedRoute'
 import './App.css'
 
 // write your code here
-
-const apiStatusConstants = {
-  initial: 'INITIAL',
-  success: 'SUCCESS',
-  failure: 'FAILURE',
-  inProgress: 'IN_PROGRESS',
-}
-
 class App extends Component {
-  state = {
-    cartList: [],
-
-    activeTab: '11',
-    categoryList: [],
-    apiStatus: apiStatusConstants.initial,
-    restDetails: {},
-  }
-
-  componentDidMount() {
-    this.getData()
-  }
-
-  getData = async () => {
-    this.setState({
-      apiStatus: apiStatusConstants.inProgress,
-    })
-
-    const url = 'https://run.mocky.io/v3/77a7e71b-804a-4fbd-822c-3e365d3482cc'
-    const response = await fetch(url)
-    const data = await response.json()
-
-    if (response.ok === true) {
-      const modifiedList = data[0].table_menu_list.map(each => ({
-        categoryDishes: each.category_dishes.map(emo => ({
-          addonCat: emo.addonCat,
-          dishAvailability: emo.dish_Availability,
-          dishType: emo.dish_Type,
-          dishCalories: emo.dish_calories,
-          dishCurrency: emo.dish_currency,
-          dishDescription: emo.dish_description,
-          dishId: emo.dish_id,
-          dishImage: emo.dish_image,
-          dishName: emo.dish_name,
-          dishPrice: emo.dish_price,
-          count: 0,
-        })),
-        menuCategory: each.menu_category,
-        menuCategoryId: each.menu_category_id,
-      }))
-      this.setState({
-        categoryList: modifiedList,
-        apiStatus: apiStatusConstants.success,
-        restDetails: data[0],
-      })
-    } else {
-      this.setState({
-        apiStatus: apiStatusConstants.failure,
-      })
-    }
-  }
+  state = {cartList: []}
 
   removeAllCartItems = () => {
     this.setState({cartList: []})
@@ -124,22 +66,9 @@ class App extends Component {
     }
   }
 
-  activeTabFunction = tabId => {
-    this.setState({activeTab: tabId})
-  }
-
-  categoryListChangeFunction = newList => {
-    this.setState({categoryList: newList})
-  }
-
   render() {
-    const {
-      cartList,
-      activeTab,
-      categoryList,
-      apiStatus,
-      restDetails,
-    } = this.state
+    const {cartList} = this.state
+    console.log(cartList)
     return (
       <CartContext.Provider
         value={{
@@ -149,13 +78,6 @@ class App extends Component {
           removeCartItem: this.removeCartItem,
           incrementCartItemQuantity: this.incrementCartItemQuantity,
           decrementCartItemQuantity: this.decrementCartItemQuantity,
-          addingData: this.addingData,
-          activeTab,
-          categoryList,
-          apiStatus,
-          restDetails,
-          activeTabFunction: this.activeTabFunction,
-          categoryListChangeFunction: this.categoryListChangeFunction,
         }}
       >
         <BrowserRouter>

@@ -5,18 +5,18 @@ import './index.css'
 
 class Login extends Component {
   state = {
-    usernameInput: '',
-    passwordInput: '',
+    username: '',
+    password: '',
     showSubmitError: false,
     errorMsg: '',
   }
 
   onUsername = event => {
-    this.setState({usernameInput: event.target.value})
+    this.setState({username: event.target.value})
   }
 
   onPassword = event => {
-    this.setState({passwordInput: event.target.value})
+    this.setState({password: event.target.value})
   }
 
   onSubmitSuccess = jwtToken => {
@@ -31,10 +31,10 @@ class Login extends Component {
 
   submitForm = async event => {
     event.preventDefault()
-    const {usernameInput, passwordInput} = this.state
+    const {username, password} = this.state
     const userData = {
-      username: usernameInput,
-      password: passwordInput,
+      username,
+      password,
     }
     const options = {
       method: 'POST',
