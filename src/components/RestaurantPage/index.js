@@ -214,7 +214,7 @@ class RestaurantPage extends Component {
                               className="addToCartButton addButton"
                               type="button"
                             >
-                              Add To Cart
+                              ADD TO CART
                             </button>
                           )}
                           {each.dishAvailability === false && (
